@@ -32,8 +32,10 @@ function getAllMovieTitles(movies) {
   //Default Value and Output 
   const movieTitles = []
   
-  for (let movie of movies) {
-    movieTitles.push(movie.title)
+  if (Array.isArray(movies) && movies.length !== 0) {
+    for (let movie of movies) {
+      movieTitles.push(movie.title)
+    }
   }
 
   return movieTitles
@@ -41,7 +43,7 @@ function getAllMovieTitles(movies) {
 
 
 //Check
-// console.log(getAllMovieTitles(exampleMovies))
+// console.log(getAllMovieTitles())
 
 /**
  * getHighestMetascore()
@@ -58,11 +60,13 @@ function getAllMovieTitles(movies) {
 function getHighestMetascore(movies) {
   //Default value and output 
   let highestMetascore = 0
-  let current = movies[0]
-
-  for (let movie of movies) {
-    movie.metascore > current.metascore ? current = movie : current;
-    highestMetascore = current.metascore
+  
+  if (Array.isArray(movies) && movies.length !== 0) {
+    let current = movies[0]
+    for (let movie of movies) {
+      movie.metascore > current.metascore ? current = movie : current;
+      highestMetascore = current.metascore
+    }
   }
 
   return Number(highestMetascore)
@@ -70,7 +74,7 @@ function getHighestMetascore(movies) {
 
 
 //Check
-// console.log(getHighestMetascore(exampleMovies))
+// console.log(getHighestMetascore())
 
 /**
  * getAverageIMDBRating()
@@ -83,23 +87,32 @@ function getHighestMetascore(movies) {
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
+
+//------------HELPER FUNCTIONS-------------
+function roundNum(num) {
+  return Number(Number(num).toFixed(2))
+}
+
 function getAverageIMDBRating(movies) {
   //Default Value and Output 
   let averageIMDBRating = 0
   let sumTotal = 0
-  const total = movies.length
 
-  for (let movie of movies) {
-    sumTotal += Number(movie.imdbRating)
-  }
+  if (Array.isArray(movies) && movies.length !== 0) {
+    const total = movies.length 
+    for (let movie of movies) {
+      sumTotal += Number(movie.imdbRating)
+    }
+    averageIMDBRating = sumTotal/total 
+  } 
 
-  return averageIMDBRating = sumTotal/total || 0
+  return roundNum(averageIMDBRating)
 
 }
 
 
 // Check 
-// console.log(getAverageIMDBRating(exampleMovies))
+// console.log(getAverageIMDBRating())
 
 /**
  * countByRating()
@@ -115,10 +128,12 @@ function getAverageIMDBRating(movies) {
 function countByRating(movies) {
   //Default value and output 
   const ratedCategories = {}
-
-  for (let movie of movies) {
-    ratedCategories[movie.rated] = ratedCategories[movie.rated] || 0
-    ratedCategories[movie.rated] += 1
+  
+  if (Array.isArray(movies) && movies.length !== 0) {
+    for (let movie of movies) {
+      ratedCategories[movie.rated] = ratedCategories[movie.rated] || 0
+      ratedCategories[movie.rated] += 1
+    }
   }
 
   return ratedCategories
@@ -126,7 +141,7 @@ function countByRating(movies) {
 
 
 //Check 
-// console.log(countByRating(exampleMovies))
+// console.log(countByRating())
 
 /**
  * findById()
@@ -145,11 +160,13 @@ function countByRating(movies) {
 function findById(movies, id) {
   //Default value and output
   let movieById = null
-
-  for (let movie of movies) {
-    if (movie.imdbID === id) { 
-      movieById = movie
-      break;
+  
+  if (Array.isArray(movies) && movies.length !== 0) {
+    for (let movie of movies) {
+      if (movie.imdbID === id) { 
+        movieById = movie
+        break;
+      }
     }
   }
 
@@ -157,7 +174,7 @@ function findById(movies, id) {
 }
 
 //Check
-// console.log(findById(exampleMovies, "tt1979376"))
+// console.log(findById())
 
 /**
  * filterByGenre()
@@ -189,13 +206,14 @@ function filterByGenre(movies, genre) {
   // Default Value and output 
   let movieByGenre = []
   
-  movieByGenre = movies.filter(movie => movie.genre.includes(titleCase(genre)))
-
+  if (Array.isArray(movies) && movies.length !== 0) {
+    movieByGenre = movies.filter(movie => movie.genre.includes(titleCase(genre)))  
+  }
   return movieByGenre
 }
 
-// Check /// CHECK FOR DEEP EQUALITY regarding movie.ratings
-// console.log(filterByGenre(exampleMovies, "Mystery"))
+// Check 
+// console.log(filterByGenre())
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -223,16 +241,18 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
   //Default Value and output 
   const moviesAtOrBeforeYear = []
 
-  for (let movie of movies) {
-    movie.released.slice(-5) <= year ? moviesAtOrBeforeYear.push(movie) : moviesAtOrBeforeYear
-  }
 
+  if (Array.isArray(movies) && movies.length !== 0) {
+    for (let movie of movies) {
+      movie.released.slice(-5) <= year ? moviesAtOrBeforeYear.push(movie) : moviesAtOrBeforeYear
+    }
+  }
   return moviesAtOrBeforeYear
 }
 
 
 //Check
-// console.log(getAllMoviesReleasedAtOrBeforeYear(exampleMovies, 2000))
+// console.log(getAllMoviesReleasedAtOrBeforeYear())
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -254,18 +274,19 @@ function toNumber(string) {
 function getBiggestBoxOfficeMovie(movies) {
   //Default value and output 
   let biggestBoxOfficeMovie = null
-  let current = movies[0]
-
-  for (let movie of movies) {
-    toNumber(movie.boxOffice) > toNumber(current.boxOffice) ? current = movie : current
-    biggestBoxOfficeMovie = current.title
+  
+  if (Array.isArray(movies) && movies.length !== 0) {
+    let current = movies[0]
+    for (let movie of movies) {
+      toNumber(movie.boxOffice) > toNumber(current.boxOffice) ? current = movie : current
+      biggestBoxOfficeMovie = current.title
+    }  
   }
-
   return biggestBoxOfficeMovie
 }
 
 //check 
-// console.log(getBiggestBoxOfficeMovie(exampleMovies) )
+// console.log(getBiggestBoxOfficeMovie() )
 
 // Do not change anything below this line.
 module.exports = {
