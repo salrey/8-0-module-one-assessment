@@ -145,7 +145,6 @@ function countByRating(movies) {
 function findById(movies, id) {
   //Default value and output
   let movieById = null
-  //let objectKeys = Object.keys(movies[0])
 
   for (let movie of movies) {
     if (movie.imdbID === id) { 
@@ -158,7 +157,7 @@ function findById(movies, id) {
 }
 
 //Check
-console.log(findById(exampleMovies, "tt1979376"))
+// console.log(findById(exampleMovies, "tt1979376"))
 
 /**
  * filterByGenre()
@@ -180,7 +179,23 @@ console.log(findById(exampleMovies, "tt1979376"))
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+//------------HELPER FUNCTIONS-------------
+
+function titleCase (genre) {
+  return genre[0].toUpperCase() + genre.slice(1).toLowerCase()
+}
+
+function filterByGenre(movies, genre) {
+  // Default Value and output 
+  let movieByGenre = []
+  
+  movieByGenre = movies.filter(movie => movie.genre.includes(titleCase(genre)))
+
+  return movieByGenre
+}
+
+// Check /// CHECK FOR DEEP EQUALITY regarding movie.ratings
+// console.log(filterByGenre(exampleMovies, "Mystery"))
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
