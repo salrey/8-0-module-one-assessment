@@ -114,7 +114,7 @@ function getAverageIMDBRating(movies) {
  */
 function countByRating(movies) {
   //Default value and output 
-  let ratedCategories = {}
+  const ratedCategories = {}
 
   for (let movie of movies) {
     ratedCategories[movie.rated] = ratedCategories[movie.rated] || 0
@@ -142,7 +142,23 @@ function countByRating(movies) {
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  //Default value and output
+  let movieById = null
+  //let objectKeys = Object.keys(movies[0])
+
+  for (let movie of movies) {
+    if (movie.imdbID === id) { 
+      movieById = movie
+      break;
+    }
+  }
+
+  return movieById 
+}
+
+//Check
+console.log(findById(exampleMovies, "tt1979376"))
 
 /**
  * filterByGenre()
