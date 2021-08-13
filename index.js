@@ -219,7 +219,20 @@ function filterByGenre(movies, genre) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  //Default Value and output 
+  const moviesAtOrBeforeYear = []
+
+  for (let movie of movies) {
+    movie.released.slice(-5) <= year ? moviesAtOrBeforeYear.push(movie) : moviesAtOrBeforeYear
+  }
+
+  return moviesAtOrBeforeYear
+}
+
+
+//Check
+// console.log(getAllMoviesReleasedAtOrBeforeYear(exampleMovies, 2000))
 
 /**
  * getBiggestBoxOfficeMovie()
