@@ -30,7 +30,7 @@ const exampleMovies = require("./movies");
  */
 function getAllMovieTitles(movies) {
   //Default Value and Output 
-  let movieTitles = []
+  const movieTitles = []
   
   for (let movie of movies) {
     movieTitles.push(movie.title)
@@ -41,7 +41,7 @@ function getAllMovieTitles(movies) {
 
 
 //Check
-console.log(getAllMovieTitles(exampleMovies))
+// console.log(getAllMovieTitles(exampleMovies))
 
 /**
  * getHighestMetascore()
@@ -54,7 +54,23 @@ console.log(getAllMovieTitles(exampleMovies))
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+
+function getHighestMetascore(movies) {
+  //Default value and output 
+  let highestMetascore = 0
+  let current = movies[0]
+
+  for (let movie of movies) {
+    movie.metascore > current.metascore ? current = movie : current;
+    highestMetascore = current.metascore
+  }
+
+  return Number(highestMetascore)
+}
+
+
+//Check
+// console.log(getHighestMetascore(exampleMovies))
 
 /**
  * getAverageIMDBRating()
