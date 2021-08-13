@@ -83,7 +83,23 @@ function getHighestMetascore(movies) {
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  //Default Value and Output 
+  let averageIMDBRating = 0
+  let sumTotal = 0
+  const total = movies.length
+
+  for (let movie of movies) {
+    sumTotal += Number(movie.imdbRating)
+  }
+
+  return averageIMDBRating = sumTotal/total || 0
+
+}
+
+
+// Check 
+// console.log(getAverageIMDBRating(exampleMovies))
 
 /**
  * countByRating()
