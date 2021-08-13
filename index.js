@@ -112,7 +112,21 @@ function getAverageIMDBRating(movies) {
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  //Default value and output 
+  let ratedCategories = {}
+
+  for (let movie of movies) {
+    ratedCategories[movie.rated] = ratedCategories[movie.rated] || 0
+    ratedCategories[movie.rated] += 1
+  }
+
+  return ratedCategories
+}
+
+
+//Check 
+// console.log(countByRating(exampleMovies))
 
 /**
  * findById()
